@@ -1,13 +1,17 @@
-const topWordHTML = (data, status) => {
-  const word = Object.getOwnPropertyNames(data.word)[0]
-  const wordCount = data.word[word]
-  
-  $('.top-word h3')[0].innerHTML = `Top word from Word Watch API: ${word} (${wordCount})`
-  $('.word-count').appendHTML
+const Word = require('./models/word')
+
+const displayTopWord = () => {
+  Word.topWord()
+    .then((data) => {
+      const word = Object.getOwnPropertyNames(data.word)[0]
+      const wordCount = data.word[word]
+      
+      $('.top-word h3')[0].innerHTML = `Top word from Word Watch API: ${word} (${wordCount})`
+      $('.word-count').appendHTML
+    })
 }
 
 const displayAnalyzedText = () => {
-  const baseUrl = 'https://wordwatch-api.herokuapp.com'
   const text = $('.text-submission textarea')[0].value
   const words = text.split(' ')
   
@@ -25,16 +29,11 @@ const displayAnalyzedText = () => {
   const wordFrequencyKeys = Object.keys(wordFrequency)
   
   wordFrequencyKeys.forEach((word) => {
-    $('.word-count').append(`<span style="font-size: ${wordFrequency[word]}em">${word}&nbsp;</span>`)
-  })
-  
-  wordFrequencyKeys.forEach((word) => {
-    const postUrl = '/api/v1/words'
-    $.post(baseUrl + postUrl, { "word": { "value": word }})
-      .then((data) => {
-        console.log(data)
-      })
+    $('.word-count').append(
+      `<span style="font-size: ${wordFrequency[word]}em">${word}&nbsp;</span>`
+    )
+    Word.post(word)
   })
 }
 
-module.exports = { topWordHTML, displayAnalyzedText }
+module.exports = { displayTopWord, displayAnalyzedText }
