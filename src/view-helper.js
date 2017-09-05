@@ -15,6 +15,18 @@ const displayAnalyzedText = () => {
   const text = $('.text-submission textarea')[0].value
   const words = text.split(' ')
   
+  let wordFrequency = countWords(words)
+  const wordFrequencyKeys = Object.keys(wordFrequency)
+  
+  wordFrequencyKeys.forEach((word) => {
+    $('.word-count').append(
+      `<span style="font-size: ${wordFrequency[word]}em">${word}&nbsp;</span>`
+    )
+    Word.post(word)
+  })
+}
+
+const countWords = (words) => {
   let wordFrequency = {}
   
   words.forEach((word) => {
@@ -25,15 +37,7 @@ const displayAnalyzedText = () => {
       wordFrequency[word] = 1
     }
   })
-  
-  const wordFrequencyKeys = Object.keys(wordFrequency)
-  
-  wordFrequencyKeys.forEach((word) => {
-    $('.word-count').append(
-      `<span style="font-size: ${wordFrequency[word]}em">${word}&nbsp;</span>`
-    )
-    Word.post(word)
-  })
+  return wordFrequency
 }
 
 module.exports = { displayTopWord, displayAnalyzedText }
