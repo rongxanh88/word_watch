@@ -35,14 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const postUrl = '/api/v1/words'
       $.post(baseUrl + postUrl, { "word": { "value": word }})
         .then((data) => {
-          debugger
+          console.log(data)
         })
-      // /api/v1/words	{ word: { value: "sample" } }
-      // $.post( "test.php", { name: "John", time: "2pm" } );
     })
   })
 })
-
-// For story 2,  
-// each word should be sent via POST request  
-// to the Word Watch API. See https://github.com/tmikeschu/wordwatch_api for details.
