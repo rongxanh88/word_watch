@@ -30,5 +30,19 @@ document.addEventListener("DOMContentLoaded", () => {
     wordFrequencyKeys.forEach((word) => {
       $('.word-count').append(`<span style="font-size: ${wordFrequency[word]}em">${word}&nbsp;</span>`)
     })
+
+    wordFrequencyKeys.forEach((word) => {
+      const postUrl = '/api/v1/words'
+      $.post(baseUrl + postUrl, { word: { value: wordFrequency[word].toString() }})
+        .then((data) => {
+          debugger
+        })
+      // /api/v1/words	{ word: { value: "sample" } }
+      // $.post( "test.php", { name: "John", time: "2pm" } );
+    })
   })
 })
+
+// For story 2,  
+// each word should be sent via POST request  
+// to the Word Watch API. See https://github.com/tmikeschu/wordwatch_api for details.
