@@ -1,9 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // have fun!
-})
+  const baseUrl = 'https://wordwatch-api.herokuapp.com'
+  const topWordUrl = '/api/v1/top_word'
 
-// As a user,  
-// when I visit Word Watch  
-// I should see the top used word and its count (based on the Word Watch API database)  
-// in the "Top Word: " heading.  
-// e.g., "Top Word: ciabatta (22)" 
+  $.get(baseUrl + topWordUrl, function(data, status){
+    const word = Object.getOwnPropertyNames(data.word)[0]
+    const wordCount = data.word[word]
+
+    $('.top-word h3')[0].innerHTML = `Top word from Word Watch API: ${word} (${wordCount})`
+    $('.word-count').appendHTML
+  });
+})
