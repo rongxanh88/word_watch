@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     wordFrequencyKeys.forEach((word) => {
       const postUrl = '/api/v1/words'
-      $.post(baseUrl + postUrl, { word: { value: wordFrequency[word].toString() }})
+      $.post(baseUrl + postUrl, { "word": { "value": word }})
         .then((data) => {
           debugger
         })
