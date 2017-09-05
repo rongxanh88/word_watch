@@ -25,16 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     })
 
-    
-    //turn hash into array of keys, call each hash[key] to get value
-    //append html with each key, and size is according to frequency of appearance
+    const wordFrequencyKeys = Object.keys(wordFrequency)
+
+    wordFrequencyKeys.forEach((word) => {
+      $('.word-count').append(`<span style="font-size: ${wordFrequency[word]}em">${word}&nbsp;</span>`)
+    })
   })
 })
-
-// As a user  
-// when I visit Word Watch  
-// and paste a paragraph into the "Paste text here" textarea  
-// and I click "Break down"  
-// Then I should see text appear on the right side of the page  
-// With each word from the paragraph only shown once  
-// and the size of each word is relative to its frequency in the paragraph.
